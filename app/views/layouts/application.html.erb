@@ -3,12 +3,46 @@
 <head>
   <title>Blog</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', 'http://fonts.googleapis.com/css?family=Raleway:400,700' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div id="sidebar">
+		<div id="logo">
+			<%= link_to root_path do %>
+				<%= image_tag '#' %>
+			<% end %>
+		</div>
+		<ul>
+			<li class="category">Website</li>
+			<li><%= link_to "Bolg", root_path %></li>
+			<li><%= link_to "About", '#' %></li>
+		</ul>
+		<ul>
+			<li class="category">Social</li>
+			<li><a href="https://twitter.com/chandra43622573">Twitter</li>
+			<li><a href="https://www.instagram.com/chandrasekharkolla">Instagram</li>
+			<li><a href="https://github.com/chandrasekharkolla/Blog">Github</li>
+		</ul>
 
-<%= yield %>
+		<p class="sign_in">Admin Login</p>
+	</div>
+	<div id="main_content">
+		<div id="header">
+			<p>All Posts</p>
+			<div class="buttons">
+				<button class="button"><%= link_to "New Post", new_post_path %></button>
+				<button class="button">Log out</button>
+			</div>
+		</div>
+		<% flash.each do |i,j| %>
+			<%= content_tag(:div, j, class: "alert") %>
+		<% end %>
+
+		<%= yield %>
+
+	</div>
 
 </body>
 </html>
