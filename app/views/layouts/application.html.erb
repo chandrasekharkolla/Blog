@@ -25,8 +25,9 @@
 			<li><a href="https://www.instagram.com/chandrasekharkolla">Instagram</li>
 			<li><a href="https://github.com/chandrasekharkolla/Blog">Github</li>
 		</ul>
-
-		<p class="sign_in"><%= link_to "Admin Login", '#' %></p>
+		<% if !user_signed_in %>
+			<p class="sign_in"><%= link_to "Admin Login", '#' %></p>
+		<% end %>
 	</div>
 	<div id="main_content">
 		<div id="header">
@@ -37,10 +38,13 @@
 			<% else %>
 				<%= link_to "Back to all posts", root_path %>
 			<% end %>
-			<div class="buttons">
-				<button class="button"><%= link_to "New Post", new_post_path %></button>
-				<button class="button">Log out</button>
-			</div>
+
+			<% if user_signed_in? %>
+				<div class="buttons">
+					<button class="button"><%= link_to "New Post", new_post_path %></button>
+					<button class="button"><%= link_to "Log out", destroy_user_session_path %></button>
+				</div>
+			<% end %>
 		</div>
 		<% flash.each do |i,j| %>
 			<%= content_tag(:div, j, class: "alert") %>
